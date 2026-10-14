@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portofolio Nenden Nurdianti</title>
     <style>
-        /* --- CSS Reset & Custom Properties --- */
+        /* --- CSS Reset & Custom Properties (Soft Pink & Rose Theme) --- */
         * {
             margin: 0;
             padding: 0;
@@ -13,26 +13,33 @@
         }
 
         :root {
-            --primary-pink: #d15b79;
-            --primary-pink-dark: #b04360;
-            --accent-purple: #9b51e0;
-            --blush-light: #fff5f7;
-            --blush-medium: #ffccd5;
-            --rose-gold: #e0a99d;
-            --dusty-rose: #bc7c6f;
-            --cream-bg: #fcf8f8;
-            --white: #ffffff;
-            --text-main: #334155;
-            --text-muted: #64748b;
-            --border-color: #f3d1d8;
-            --shadow-subtle: 0 15px 35px -5px rgba(209, 91, 121, 0.15), 0 10px 15px -5px rgba(155, 81, 224, 0.08);
-            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+            --pink-primary: #d97792;
+            --pink-dark: #9f4762;
+            --pink-light: #fce8ee;
+            --pink-subtle: #fff0f3;
+            --pink-border: #f3c9d4;
+            --rose-accent: #c48b9f;
+            
+            --bg-body: #fff8f9;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d2628;
+            --text-muted: #6b5c61;
+            
+            --shadow-card: 0 10px 30px -5px rgba(217, 119, 146, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 40px -10px rgba(217, 119, 146, 0.22);
+            
+            --radius-box: 24px;
+            --radius-card: 18px;
         }
 
-        /* --- Global Body & Typography --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--cream-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.7;
             display: flex;
@@ -41,11 +48,11 @@
             overflow-x: hidden;
         }
 
-        /* --- Animations --- */
+        /* --- Keyframe Animations --- */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-25px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -56,7 +63,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(25px);
             }
             to {
                 opacity: 1;
@@ -64,36 +71,27 @@
             }
         }
 
-        /* Efek Gradasi Bergerak yang Memukau */
-        @keyframes gradientFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         .animate-fade-down {
-            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInDown 0.8s ease-out forwards;
         }
 
         .animate-fade-up {
-            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* --- Header & Navigation dengan Gradasi Animasi --- */
+        /* --- Header & Navigation (Soft Pink Gradient) --- */
         header.main-header {
-            background: linear-gradient(135deg, #d15b79, #b04360, #9b51e0, #e0a99d);
-            background-size: 300% 300%;
-            animation: gradientFlow 10s ease infinite;
-            color: var(--white);
-            padding: 4rem 1rem 3.5rem 1rem;
+            background: linear-gradient(135deg, #e895aa, #d97792, #b85472);
+            color: #ffffff;
+            padding: 4rem 1.5rem 3.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 10px 30px -5px rgba(209, 91, 121, 0.35);
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 146, 0.25);
             position: relative;
         }
 
@@ -104,55 +102,56 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #fff, var(--blush-medium), var(--rose-gold), #fff);
-            background-size: 200% auto;
-            animation: gradientFlow 5s linear infinite;
+            background: linear-gradient(90deg, #ffffff, var(--pink-light), #ffffff);
         }
 
         header.main-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1.25rem;
+            font-size: 2.6rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
             max-width: 750px;
             margin: 0 auto;
         }
 
         nav a {
-            color: var(--white);
+            color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.65rem 1.4rem;
+            font-size: 0.92rem;
+            padding: 0.6rem 1.4rem;
             border-radius: 9999px;
             background-color: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         nav a:hover {
-            background-color: rgba(255, 255, 255, 0.35);
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            border-color: rgba(255, 255, 255, 0.6);
+            background-color: #ffffff;
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         /* --- Main Layout --- */
         main {
-            max-width: 950px;
+            max-width: 1000px;
             width: 90%;
             margin: 3.5rem auto;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
         }
 
         hr {
@@ -161,27 +160,30 @@
 
         /* --- Section Styling --- */
         section {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 20px;
+            background: var(--bg-card);
+            padding: 2.8rem;
+            border-radius: var(--radius-box);
             box-shadow: var(--shadow-card);
-            margin-bottom: 2.5rem;
-            border: 1px solid rgba(255, 204, 213, 0.4);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            border: 1px solid var(--pink-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         section:hover {
-            box-shadow: var(--shadow-subtle);
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-hover);
             transform: translateY(-3px);
         }
 
         section h2 {
-            font-size: 1.75rem;
-            color: #1e293b;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border-color);
+            font-size: 1.65rem;
+            color: var(--text-main);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pink-light);
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         section h2::after {
@@ -189,44 +191,68 @@
             position: absolute;
             bottom: -2px;
             left: 0;
-            width: 70px;
+            width: 75px;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-pink), var(--accent-purple));
-            border-radius: 2px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+            border-radius: 3px;
         }
 
-        section p {
-            font-size: 1.1rem;
+        /* --- Desain Khusus Tentang Saya --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-light), #f8d4df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--pink-primary);
+            box-shadow: 0 8px 20px rgba(217, 119, 146, 0.2);
+            flex-shrink: 0;
+        }
+
+        .profile-avatar span {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--pink-dark);
+        }
+
+        .about-text p {
+            font-size: 1.08rem;
             color: var(--text-muted);
             line-height: 1.8;
         }
 
-        /* Highlight untuk nama dengan efek gradasi teks */
         .name-highlight {
-            background: linear-gradient(135deg, var(--primary-pink-dark), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            display: inline-block;
+            color: var(--pink-dark);
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--pink-light) 0%, rgba(252, 232, 238, 0) 100%);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
         }
 
-        /* --- Article & Project Cards Grid (Sejajar & Cantik) --- */
+        /* --- Article & Project Cards Grid (Seragam & Elegan) --- */
         article {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.75rem;
-            margin-top: 1.5rem;
+            gap: 1.6rem;
         }
 
         article header {
-            background: linear-gradient(135deg, var(--blush-light), #ffffff);
+            background: var(--bg-card);
             color: var(--text-main);
-            padding: 2.2rem;
-            border-radius: 16px;
+            padding: 2rem;
+            border-radius: var(--radius-card);
             text-align: left;
-            box-shadow: 0 4px 15px rgba(209, 91, 121, 0.05);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(217, 119, 146, 0.05);
+            border: 1px solid var(--pink-border);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -241,63 +267,72 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-pink), var(--accent-purple));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
         }
 
         article header:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-subtle);
-            border-color: var(--blush-medium);
-            background-color: var(--white);
-        }
-
-        article header:hover::before {
-            opacity: 1;
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--pink-primary);
         }
 
         article h3 {
-            font-size: 1.3rem;
-            color: var(--primary-pink-dark);
-            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--pink-dark);
+            margin-bottom: 0.9rem;
             font-weight: 700;
         }
 
-        article h3:nth-of-type(2) {
-            font-size: 0.85rem;
+        /* Label "Fitur :" */
+        article header h3:nth-of-type(2) {
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--dusty-rose);
-            margin-top: 1.2rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
             margin-bottom: 0.6rem;
             font-weight: 700;
         }
 
         article ul {
-            list-style-type: disc;
-            padding-left: 1.25rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         article li {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             color: var(--text-muted);
-            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Bullet point mini stylish */
+        article li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--pink-primary);
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
         /* --- Aside / Status Pekerjaan --- */
         aside {
-            max-width: 950px;
-            width: 90%;
-            margin: 0 auto 3.5rem auto;
-            background: linear-gradient(135deg, rgba(255, 245, 247, 0.95), rgba(255, 228, 233, 0.8));
-            border: 1px solid var(--border-color);
-            padding: 2.2rem;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #ffffff, var(--pink-subtle));
+            border: 1px solid var(--pink-border);
+            padding: 2rem;
+            border-radius: var(--radius-box);
             text-align: center;
             box-shadow: var(--shadow-card);
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.1rem;
         }
 
         aside::before {
@@ -307,53 +342,44 @@
             left: 0;
             width: 8px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--primary-pink), var(--accent-purple));
+            background: linear-gradient(to bottom, var(--pink-primary), var(--rose-accent));
         }
 
         aside h3 {
-            color: var(--primary-pink-dark);
-            font-size: 1.25rem;
-            margin-bottom: 0.6rem;
+            color: var(--text-main);
+            font-size: 1.08rem;
+            margin-bottom: 0;
             font-weight: 700;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.6rem;
         }
 
         aside h3::before {
             content: '';
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-color: #10b981;
             border-radius: 50%;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            animation: pulseGlow 2s infinite;
         }
 
         aside p {
-            color: var(--text-main);
+            color: var(--pink-dark);
             font-weight: 600;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
         }
 
         /* --- Footer --- */
         footer {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: #94a3b8;
+            background-color: #3b2c31;
+            color: #d1b8c0;
             text-align: center;
-            padding: 2.5rem 1rem;
-            font-size: 0.95rem;
+            padding: 2.2rem 1rem;
+            font-size: 0.92rem;
             margin-top: auto;
-            border-top: 1px solid #334155;
-            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid #4f3c43;
         }
 
         footer center {
@@ -363,14 +389,21 @@
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             header.main-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.1rem;
             }
+
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            aside {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
             section {
-                padding: 1.75rem;
-            }
-            main {
-                width: 94%;
-                margin: 2rem auto;
+                padding: 1.8rem;
             }
         }
     </style>
@@ -381,40 +414,35 @@
         <h1>Portofolio Mahasiswa</h1>
         <nav>
             <ul>
-                <li>
-                    <a href="index.html">Beranda</a>
-                </li>
-                <li>
-                    <a href="kontak.html">Kontak Saya</a>
-                </li>
-                <li>
-                    <a href="resume.html">Resume Saya</a>
-                </li>
-                <li>
-                    <a href="project.html">Project Saya</a>
-                </li>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html">Kontak Saya</a></li>
+                <li><a href="resume.html">Resume Saya</a></li>
+                <li><a href="project.html">Project Saya</a></li>
             </ul>
         </nav>
     </header>
 
-    <hr />
-
     <main>
         <section class="animate-fade-up">
             <h2>Tentang Saya</h2>
-            <p>Hallo Nama saya <span class="name-highlight">Nenden Nurdianti</span>, saat ini sedang belajar pemrograman web</p>
+            <div class="about-container">
+                <div class="profile-avatar">
+                    <span>NN</span>
+                </div>
+                <div class="about-text">
+                    <p>Halo! Nama saya <span class="name-highlight">Nenden Nurdianti</span>, saat ini sedang aktif belajar pemrograman web dengan fokus membangun tampilan antarmuka yang rapi, fungsional, dan estetis.</p>
+                </div>
+            </div>
         </section>
-
-        <hr />
 
         <section class="animate-fade-up" style="animation-delay: 0.15s;">
             <h2>Project Saya</h2>
             <article>
                 <header>
-                    <h3>Aplikasi kasir sederhana</h3>
-                    <h3>Fitur : </h3>
+                    <h3>Aplikasi Kasir Sederhana</h3>
+                    <h3>Fitur :</h3>
                     <ul>
-                        <li>Autentikasi google</li>
+                        <li>Autentikasi Google</li>
                         <li>Otomatisasi Penjumlahan Hasil</li>
                         <li>Ekspor ke Excel</li>
                     </ul>
@@ -422,19 +450,19 @@
                 
                 <header>
                     <h3>Sistem Inventaris Keuangan</h3>
-                    <h3>Fitur : </h3>
+                    <h3>Fitur :</h3>
                     <ul>
                         <li>Penjumlahan Uang Bulanan</li>
-                        <li>Rangkuman Pemasukan pengeluaran</li>
-                        <li>manajemen keuangan lebih mudah</li>
+                        <li>Rangkuman Pemasukan & Pengeluaran</li>
+                        <li>Manajemen keuangan lebih mudah</li>
                     </ul>
                 </header>
                 
                 <header>
                     <h3>Kalkulator Sederhana</h3>
-                    <h3>Fitur : </h3>
+                    <h3>Fitur :</h3>
                     <ul>
-                        <li>Autentikasi google</li>
+                        <li>Autentikasi Google</li>
                         <li>Otomatisasi Penjumlahan hasil</li>
                         <li>Ekspor ke Excel</li>
                     </ul>
@@ -443,15 +471,15 @@
         </section>
     </main>
 
-    <hr />
-
     <aside class="animate-fade-up" style="animation-delay: 0.3s;">
-        <h3>Status Pekerjaan</h3>
+        <h3>Status Pekerjaan:</h3>
         <p>Bisa menerima project freelance</p>
     </aside>
     
     <footer>
-        <center>&copy; Teknik Informatika 2026</center>
+        <center>&copy;Nenden Nurdianti</center>
+        <p>Teknik Informatika - Institut Teknologi Garut</p>
+        <br>
     </footer>
 
 </body>
