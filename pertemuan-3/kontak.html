@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Saya - Portofolio Nenden Nurdianti</title>
+    <style>
+        /* --- CSS Reset & Custom Properties --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-pink: #d15b79;
+            --primary-pink-dark: #b04360;
+            --accent-purple: #9b51e0;
+            --blush-light: #fff5f7;
+            --blush-medium: #ffccd5;
+            --rose-gold: #e0a99d;
+            --dusty-rose: #bc7c6f;
+            --cream-bg: #fcf8f8;
+            --white: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #f3d1d8;
+            --shadow-subtle: 0 15px 35px -5px rgba(209, 91, 121, 0.15), 0 10px 15px -5px rgba(155, 81, 224, 0.08);
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+        }
+
+        /* --- Global Body & Typography --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream-bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efek Gradasi Bergerak yang Memukau */
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* --- Header & Navigation dengan Gradasi Animasi --- */
+        header.main-header {
+            background: linear-gradient(135deg, #d15b79, #b04360, #9b51e0, #e0a99d);
+            background-size: 300% 300%;
+            animation: gradientFlow 10s ease infinite;
+            color: var(--white);
+            padding: 4rem 1rem 3.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 10px 30px -5px rgba(209, 91, 121, 0.35);
+            position: relative;
+        }
+
+        header.main-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fff, var(--blush-medium), var(--rose-gold), #fff);
+            background-size: 200% auto;
+            animation: gradientFlow 5s linear infinite;
+        }
+
+        header.main-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 750px;
+            width: 90%;
+            margin: 3.5rem auto;
+            flex: 1;
+        }
+
+        /* --- Section & Form Styling --- */
+        section {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(255, 204, 213, 0.4);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        section:hover {
+            box-shadow: var(--shadow-subtle);
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background-color: var(--blush-light);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(155, 81, 224, 0.12);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        button {
+            padding: 0.85rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-purple));
+            color: white;
+            flex: 1;
+            box-shadow: 0 4px 15px rgba(209, 91, 121, 0.3);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(155, 81, 224, 0.4);
+        }
+
+        button[type="reset"] {
+            background-color: var(--blush-medium);
+            color: var(--primary-pink-dark);
+        }
+
+        button[type="reset"]:hover {
+            background-color: #f7b2bd;
+            transform: translateY(-3px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            font-size: 0.95rem;
+            margin-top: auto;
+            border-top: 1px solid #334155;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer center {
+            display: block;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header.main-header h1 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 1.75rem;
+            }
+            main {
+                width: 94%;
+                margin: 2rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header animate-fade-down">
+        <h1>Kontak Saya</h1>
+        
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Beranda</a>
+                </li>
+                <li>
+                    <a href="kontak.html">Kontak Saya</a>
+                </li>
+                <li>
+                    <a href="resume.html">Resume Saya</a>
+                </li>
+                <li>
+                    <a href="project.html">Project Saya</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="animate-fade-up">
+            <h2>Kirimkan penawaran Anda</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="nama_pengirim">Nama</label>
+                    <input type="text" id="nama_pengirim" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_pengirim">Email</label>
+                    <input type="email" id="email_pengirim" placeholder="nama@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jenis_layanan">Layanan yang dibutuhkan</label>
+                    <select name="jenis_layanan" id="jenis_layanan" required>
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="web">Pembuatan Web</option>
+                        <option value="aplikasi">Pembuatan Aplikasi</option>
+                        <option value="lainnya">Lain-lain</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pesan">Pesan</label>
+                    <textarea name="pesan" id="pesan" rows="5" placeholder="Tuliskan detail project Anda..." required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Kirim Pesan</button>
+                    <button type="reset">Batal / Reset</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <center>&copy; Teknik Informatika 2026</center>
+    </footer>
+</body>
+</html>
