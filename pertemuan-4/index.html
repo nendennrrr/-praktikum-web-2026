@@ -1,68 +1,1003 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Dashboard Portofolio Proyek - Modul 4</title>
- <style>
- * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, sans-serif; }
- body { background-color: #f1f5f9; color: #0f172a; padding: 30px 15px; }
- .container { max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 25px;
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
- h1 { color: #1e3a8a; font-size: 24px; margin-bottom: 5px; }
- p.subtitle { color: #64748b; margin-bottom: 20px; font-size: 14px; }
- .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
-margin-bottom: 25px; }
- .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; textalign: center; }
- .stat-card h3 { font-size: 13px; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }
- .stat-card p { font-size: 20px; font-weight: bold; color: #1e3a8a; }
- .filter-group { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
- .btn-filter { padding: 8px 16px; border: 1px solid #cbd5e1; background: #ffffff; border-radius: 6px;
-cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
- .btn-filter.active, .btn-filter:hover { background: #1e3a8a; color: #ffffff; border-color: #1e3a8a; }
- .project-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 12px;
-display: flex; justify-content: space-between; align-items: center; background: #ffffff; transition: transform
-0.15s ease; }
- .project-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
- .project-info h4 { font-size: 16px; color: #0f172a; margin-bottom: 4px; }
- .project-category { display: inline-block; font-size: 12px; color: #0284c7; background: #e0f2fe; padding:
-2px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 600; }
- .project-budget { font-size: 14px; color: #334155; font-weight: 600; }
- .badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
- .badge-success { background: #dcfce7; color: #166534; }
- .badge-pending { background: #fef9c3; color: #854d0e; }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Nenden Nurdianti</title>
+    <style>
+        /* --- CSS Reset & Custom Properties (Soft Pink & Rose Theme) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-primary: #d97792;
+            --pink-dark: #9f4762;
+            --pink-light: #fce8ee;
+            --pink-subtle: #fff0f3;
+            --pink-border: #f3c9d4;
+            --rose-accent: #c48b9f;
+            
+            --bg-body: #fff8f9;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d2628;
+            --text-muted: #6b5c61;
+            
+            --shadow-card: 0 10px 30px -5px rgba(217, 119, 146, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 40px -10px rgba(217, 119, 146, 0.22);
+            
+            --radius-box: 24px;
+            --radius-card: 18px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation (Soft Pink Gradient) --- */
+        header.main-header {
+            background: linear-gradient(135deg, #e895aa, #d97792, #b85472);
+            color: #ffffff;
+            padding: 4rem 1.5rem 3.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 146, 0.25);
+            position: relative;
+        }
+
+        header.main-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffffff, var(--pink-light), #ffffff);
+        }
+
+        header.main-header h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #ffffff;
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 1000px;
+            width: 90%;
+            margin: 3.5rem auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+        }
+
+        /* --- Section Styling --- */
+        section {
+            background: var(--bg-card);
+            padding: 2.8rem;
+            border-radius: var(--radius-box);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--pink-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        section:hover {
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        section h2 {
+            font-size: 1.65rem;
+            color: var(--text-main);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pink-light);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 75px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+            border-radius: 3px;
+        }
+
+        /* --- Desain Khusus Tentang Saya --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-light), #f8d4df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--pink-primary);
+            box-shadow: 0 8px 20px rgba(217, 119, 146, 0.2);
+            flex-shrink: 0;
+        }
+
+        .profile-avatar span {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--pink-dark);
+        }
+
+        .about-text p {
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .name-highlight {
+            color: var(--pink-dark);
+            font-weight: 700;
+            background: linear-gradient(120deg, var(--pink-light) 0%, rgba(252, 232, 238, 0) 100%);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        /* --- Statistik Ringkasan Kartu --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--pink-subtle);
+            border: 1px solid var(--pink-border);
+            padding: 1.2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--pink-dark);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* --- Form Input Proyek Dinamis --- */
+        .project-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            background-color: var(--pink-subtle);
+            padding: 1.6rem;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--pink-border);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--pink-dark);
+        }
+
+        .form-group input, 
+        .form-group select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--pink-border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 146, 0.2);
+        }
+
+        .checkbox-group {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            margin-top: 0.4rem;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--pink-primary);
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(217, 119, 146, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(217, 119, 146, 0.4);
+        }
+
+        .alert-box {
+            display: none;
+            padding: 0.8rem 1.2rem;
+            background-color: #fde8e8;
+            border: 1px solid #f8b4b4;
+            color: #9b1c1c;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        /* --- Live Search & Filter Bar --- */
+        .filter-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 0.75rem 1.2rem;
+            border: 1px solid var(--pink-border);
+            border-radius: 9999px;
+            font-family: inherit;
+            font-size: 0.94rem;
+            outline: none;
+            background: #ffffff;
+            transition: all 0.2s;
+        }
+
+        .search-input-wrapper input:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 146, 0.2);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1.2rem;
+            border: 1px solid var(--pink-border);
+            border-radius: 9999px;
+            background: #ffffff;
+            font-family: inherit;
+            font-size: 0.92rem;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* --- Project Cards Grid --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 2rem;
+            border-radius: var(--radius-card);
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(217, 119, 146, 0.05);
+            border: 1px solid var(--pink-border);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--pink-primary);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            gap: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: var(--pink-dark);
+            font-weight: 700;
+        }
+
+        .badge-category {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .project-budget {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .status-completed {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .features-title {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .project-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card li {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .project-card li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--pink-primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* --- Action Buttons --- */
+        .card-actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--pink-border);
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.55rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-toggle {
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--pink-primary);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-delete:hover {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            background-color: var(--pink-subtle);
+            border-radius: var(--radius-card);
+            border: 1px dashed var(--pink-border);
+        }
+
+        /* --- Aside / Status Pekerjaan --- */
+        aside {
+            background: linear-gradient(135deg, #ffffff, var(--pink-subtle));
+            border: 1px solid var(--pink-border);
+            padding: 2rem;
+            border-radius: var(--radius-box);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.1rem;
+        }
+
+        aside::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--pink-primary), var(--rose-accent));
+        }
+
+        aside h3 {
+            color: var(--text-main);
+            font-size: 1.08rem;
+            margin-bottom: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        aside h3::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: pulseGlow 2s infinite;
+        }
+
+        aside p {
+            color: var(--pink-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #3b2c31;
+            color: #d1b8c0;
+            text-align: center;
+            padding: 2.2rem 1rem;
+            font-size: 0.92rem;
+            margin-top: auto;
+            border-top: 1px solid #4f3c43;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header.main-header h1 {
+                font-size: 2.1rem;
+            }
+
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            aside {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            section {
+                padding: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
- <div class="container">
-Modul 4: Dasar Logika Pemrograman dengan JavaScript | Praktikum Pemrograman Web
- <h1>Portofolio Proyek</h1>
- <p class="subtitle">Modul 4: Pengolahan Logika Data & Interaktivitas DOM</p>
- <!-- Kartu Ringkasan Statistik -->
- <div class="stats-grid">
- <div class="stat-card">
- <h3>Total Proyek</h3>
- <p id="stat-total-projects">0</p>
- </div>
- <div class="stat-card">
- <h3>Total Anggaran</h3>
- <p id="stat-total-budget">Rp 0</p>
- </div>
- <div class="stat-card">
- <h3>Selesai Dikerjakan</h3>
- <p id="stat-completed-projects">0</p>
- </div>
- </div>
- <!-- Tombol Filter Kategori -->
- <div class="filter-group">
- <button class="btn-filter active" data-category="Semua">Semua Proyek</button>
- <button class="btn-filter" data-category="Web App">Web App</button>
- <button class="btn-filter" data-category="Desktop App">Desktop App</button>
- <button class="btn-filter" data-category="Mobile App">Mobile App</button>
- </div>
- <!-- Kontainer Daftar Proyek -->
- <div id="project-list"></div>
- </div>
- <script src="main.js"></script>
+
+    <header class="main-header animate-fade-down">
+        <h1>Portofolio Mahasiswa</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html">Kontak Saya</a></li>
+                <li><a href="resume.html">Resume Saya</a></li>
+                <li><a href="project.html" class="active">Project Saya</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section Tentang Saya -->
+        <section id="beranda" class="animate-fade-up">
+            <h2>Tentang Saya</h2>
+            <div class="about-container">
+                <div class="profile-avatar">
+                    <span>NN</span>
+                </div>
+                <div class="about-text">
+                    <p>Halo! Nama saya <span class="name-highlight">Nenden Nurdianti</span>, saat ini sedang aktif belajar pemrograman web dengan fokus membangun tampilan antarmuka yang rapi, fungsional, dan estetis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Manajemen Proyek -->
+        <section id="project" class="animate-fade-up" style="animation-delay: 0.15s;">
+            <h2>Project Saya</h2>
+            
+            <!-- Ringkasan Statistik Proyek -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total">0</div>
+                    <div class="stat-label">Total Proyek</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-completed">0</div>
+                    <div class="stat-label">Sudah Selesai</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-pending">0</div>
+                    <div class="stat-label">Dalam Pengerjaan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-budget">Rp 0</div>
+                    <div class="stat-label">Total Anggaran</div>
+                </div>
+            </div>
+
+            <!-- Pesan Alert Validasi -->
+            <div id="alert-box" class="alert-box"></div>
+
+            <!-- FITUR 1: Form Input Proyek Dinamis -->
+            <form id="project-form" class="project-form">
+                <div class="form-group">
+                    <label for="project-title">Judul Proyek *</label>
+                    <input type="text" id="project-title" placeholder="Masukkan judul proyek..." required>
+                </div>
+                <div class="form-group">
+                    <label for="project-category">Kategori *</label>
+                    <select id="project-category">
+                        <option value="Web App">Web App</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="Desktop App">Desktop App</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="project-budget-input">Estimasi Anggaran (Rp) *</label>
+                    <input type="number" id="project-budget-input" placeholder="Contoh: 1500000" min="1" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="project-completed">
+                    <label for="project-completed" style="cursor: pointer;">Sudah Selesai</label>
+                </div>
+                <div class="form-group full-width">
+                    <button type="submit" class="btn-submit">+ Tambah Proyek Baru</button>
+                </div>
+            </form>
+
+            <!-- FITUR 2: Pencarian Real-Time & Filter Terpadu -->
+            <div class="filter-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" placeholder="🔍 Cari nama proyek secara real-time...">
+                </div>
+                <select id="category-filter" class="filter-select">
+                    <option value="ALL">Semua Kategori</option>
+                    <option value="Web App">Web App</option>
+                    <option value="Mobile App">Mobile App</option>
+                    <option value="Desktop App">Desktop App</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                </select>
+            </div>
+
+            <!-- Dynamic Project Cards Container -->
+            <div id="projects-container" class="projects-grid">
+                <!-- Kartu proyek akan di-render secara otomatis oleh JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <aside class="animate-fade-up" style="animation-delay: 0.3s;">
+        <h3>Status Pekerjaan:</h3>
+        <p>Bisa menerima project freelance</p>
+    </aside>
+    
+    <footer>
+        <p>&copy; Nenden Nurdianti</p>
+        <p>Teknik Informatika - Institut Teknologi Garut</p>
+    </footer>
+
+    <!-- LOGIKA JAVASCRIPT DINAMIS -->
+    <script>
+        // Data Awal Proyek (State)
+        let projects = [
+            {
+                id: 1700000000001,
+                title: "Aplikasi Kasir Sederhana",
+                category: "Web App",
+                budget: 2500000,
+                isCompleted: true,
+                features: [
+                    "Autentikasi Google",
+                    "Otomatisasi Penjumlahan Hasil",
+                    "Ekspor ke Excel"
+                ]
+            },
+            {
+                id: 1700000000002,
+                title: "Sistem Inventaris Keuangan",
+                category: "Desktop App",
+                budget: 3500000,
+                isCompleted: false,
+                features: [
+                    "Penjumlahan Uang Bulanan",
+                    "Rangkuman Pemasukan & Pengeluaran",
+                    "Manajemen keuangan lebih mudah"
+                ]
+            },
+            {
+                id: 1700000000003,
+                title: "Kalkulator Sederhana",
+                category: "Web App",
+                budget: 750000,
+                isCompleted: true,
+                features: [
+                    "Autentikasi Google",
+                    "Otomatisasi Penjumlahan hasil",
+                    "Ekspor ke Excel"
+                ]
+            }
+        ];
+
+        // Elemen DOM
+        const projectsContainer = document.getElementById('projects-container');
+        const projectForm = document.getElementById('project-form');
+        const searchInput = document.getElementById('search-input');
+        const categoryFilter = document.getElementById('category-filter');
+        const alertBox = document.getElementById('alert-box');
+
+        // Elemen Statistik
+        const statTotal = document.getElementById('stat-total');
+        const statCompleted = document.getElementById('stat-completed');
+        const statPending = document.getElementById('stat-pending');
+        const statBudget = document.getElementById('stat-budget');
+
+        // Format Angka ke Rupiah IDR
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0
+            }).format(number);
+        }
+
+        // Tampilkan Alert Error Estetis
+        function showAlert(message) {
+            alertBox.textContent = message;
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 3500);
+        }
+
+        // Render Statistik Ringkasan
+        function updateStatistics() {
+            const total = projects.length;
+            const completed = projects.filter(p => p.isCompleted).length;
+            const pending = total - completed;
+            const totalBudget = projects.reduce((acc, p) => acc + (Number(p.budget) || 0), 0);
+
+            statTotal.textContent = total;
+            statCompleted.textContent = completed;
+            statPending.textContent = pending;
+            statBudget.textContent = formatRupiah(totalBudget);
+        }
+
+        // Render Daftar Proyek Berdasarkan Filter & Search
+        function renderProjects() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const selectedCategory = categoryFilter.value;
+
+            // FITUR 2: Live Search & Filter Terpadu
+            const filteredProjects = projects.filter(project => {
+                const matchesSearch = project.title.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'ALL' || project.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            // Kosongkan kontainer proyek
+            projectsContainer.innerHTML = '';
+
+            if (filteredProjects.length === 0) {
+                projectsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <p>Tidak ada proyek yang sesuai dengan kriteria pencarian.</p>
+                    </div>
+                `;
+                updateStatistics();
+                return;
+            }
+
+            // Render setiap proyek yang tersaring
+            filteredProjects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                
+                const featuresListHtml = project.features && project.features.length > 0
+                    ? project.features.map(f => `<li>${f}</li>`).join('')
+                    : `<li>Fitur Utama Dinamis</li><li>Responsif & Interaktif</li>`;
+
+                card.innerHTML = `
+                    <div>
+                        <div class="project-header">
+                            <h3>${project.title}</h3>
+                            <span class="badge-category">${project.category}</span>
+                        </div>
+                        <div class="project-budget">${formatRupiah(project.budget)}</div>
+                        <div class="project-status ${project.isCompleted ? 'status-completed' : 'status-pending'}">
+                            <span>${project.isCompleted ? '✓ Selesai' : '⏳ Dalam Pengerjaan'}</span>
+                        </div>
+                        <div class="features-title">Fitur :</div>
+                        <ul>
+                            ${featuresListHtml}
+                        </ul>
+                    </div>
+                    <!-- FITUR 3: Tombol Aksi Interaktif -->
+                    <div class="card-actions">
+                        <button class="btn-action btn-toggle" onclick="toggleProjectStatus(${project.id})">
+                            ${project.isCompleted ? 'Ubah Status' : 'Tandai Selesai'}
+                        </button>
+                        <button class="btn-action btn-delete" onclick="deleteProject(${project.id})">
+                            Hapus
+                        </button>
+                    </div>
+                `;
+
+                projectsContainer.appendChild(card);
+            });
+
+            updateStatistics();
+        }
+
+        // FITUR 1: Form Handling & Validation
+        projectForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const titleInput = document.getElementById('project-title').value.trim();
+            const categoryInput = document.getElementById('project-category').value;
+            const budgetInput = parseFloat(document.getElementById('project-budget-input').value);
+            const completedInput = document.getElementById('project-completed').checked;
+
+            // Validasi Input
+            if (!titleInput) {
+                showAlert('⚠️ Judul Proyek tidak boleh kosong!');
+                return;
+            }
+
+            if (isNaN(budgetInput) || budgetInput <= 0) {
+                showAlert('⚠️ Estimasi Anggaran harus lebih besar dari 0!');
+                return;
+            }
+
+            // Objek Proyek Baru dengan Unique ID (Date.now())
+            const newProject = {
+                id: Date.now(),
+                title: titleInput,
+                category: categoryInput,
+                budget: budgetInput,
+                isCompleted: completedInput,
+                features: [
+                    "Fitur Utama Dinamis",
+                    "Responsif & Interaktif",
+                    "Terintegrasi Sistem"
+                ]
+            };
+
+            // Masukkan ke array menggunakan Spread Operator
+            projects = [newProject, ...projects];
+
+            // Reset Form Input
+            projectForm.reset();
+
+            // Render ulang Tampilan
+            renderProjects();
+        });
+
+        // FITUR 2: Real-time Event Listener pada Search Input & Select
+        searchInput.addEventListener('input', renderProjects);
+        categoryFilter.addEventListener('change', renderProjects);
+
+        // FITUR 3a: Toggle Status Proyek (Selesai <-> Dalam Pengerjaan)
+        window.toggleProjectStatus = function(id) {
+            projects = projects.map(project => {
+                if (project.id === id) {
+                    return { ...project, isCompleted: !project.isCompleted };
+                }
+                return project;
+            });
+            renderProjects();
+        };
+
+        // FITUR 3b: Hapus Proyek dari Array
+        window.deleteProject = function(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus proyek ini?")) {
+                projects = projects.filter(project => project.id !== id);
+                renderProjects();
+            }
+        };
+
+        // Inisialisasi Tampilan Awal
+        renderProjects();
+    </script>
 </body>
 </html>

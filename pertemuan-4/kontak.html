@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Saya - Portofolio Nenden Nurdianti</title>
+    <style>
+        /* --- CSS Reset & Custom Properties (Soft Pink Theme) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-primary: #d97792;
+            --pink-dark: #9f4762;
+            --pink-light: #fce8ee;
+            --pink-subtle: #fff0f3;
+            --pink-border: #f3c9d4;
+            --rose-accent: #c48b9f;
+            
+            --bg-body: #fff8f9;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d2628;
+            --text-muted: #6b5c61;
+            
+            --shadow-card: 0 10px 30px -5px rgba(217, 119, 146, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 40px -10px rgba(217, 119, 146, 0.22);
+            
+            --radius-box: 24px;
+            --radius-input: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation --- */
+        header.main-header {
+            background: linear-gradient(135deg, #e895aa, #d97792, #b85472);
+            color: #ffffff;
+            padding: 4rem 1.5rem 3.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 146, 0.25);
+            position: relative;
+        }
+
+        header.main-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffffff, var(--pink-light), #ffffff);
+        }
+
+        header.main-header h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover {
+            background-color: #ffffff;
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 700px;
+            width: 90%;
+            margin: 3.5rem auto;
+            flex: 1;
+        }
+
+        /* --- Section & Form Styling --- */
+        section {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-box);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--pink-border);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        section:hover {
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        section h2 {
+            font-size: 1.65rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pink-light);
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 75px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+            border-radius: 3px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.92rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1px solid var(--pink-border);
+            border-radius: var(--radius-input);
+            font-size: 0.98rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background-color: var(--bg-card);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--pink-primary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(217, 119, 146, 0.15);
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: none;
+            margin-top: -0.2rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            padding: 0.9rem 1.6rem;
+            border: none;
+            border-radius: var(--radius-input);
+            font-size: 0.96rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-dark));
+            color: white;
+            flex: 1;
+            box-shadow: 0 6px 20px rgba(217, 119, 146, 0.3);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(217, 119, 146, 0.45);
+        }
+
+        button[type="reset"] {
+            background-color: var(--pink-subtle);
+            color: var(--pink-dark);
+            border: 1px solid var(--pink-border);
+        }
+
+        button[type="reset"]:hover {
+            background-color: var(--pink-light);
+            transform: translateY(-2px);
+        }
+
+        /* --- Alert Notifikasi Flash --- */
+        .alert-success {
+            display: none;
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-input);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #3b2c31;
+            color: #d1b8c0;
+            text-align: center;
+            padding: 2.2rem 1rem;
+            font-size: 0.92rem;
+            margin-top: auto;
+            border-top: 1px solid #4f3c43;
+        }
+
+        footer center {
+            display: block;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header.main-header h1 {
+                font-size: 2.1rem;
+            }
+            section {
+                padding: 1.8rem;
+            }
+            main {
+                width: 94%;
+                margin: 2rem auto;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header animate-fade-down">
+        <h1>Kontak Saya</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html">Kontak Saya</a></li>
+                <li><a href="resume.html">Resume Saya</a></li>
+                <li><a href="project.html">Project Saya</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="animate-fade-up">
+            <h2>Kirimkan penawaran Anda</h2>
+
+            <!-- Alert Notifikasi Berhasil -->
+            <div id="alertSuccess" class="alert-success">
+                ✨ Pesan Anda berhasil dikirim! Nenden akan segera menghubungi Anda.
+            </div>
+
+            <form id="contactForm" action="#" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="nama_pengirim">Nama *</label>
+                    <input type="text" id="nama_pengirim" placeholder="Masukkan nama Anda">
+                    <span class="error-message" id="errorNama">Nama wajib diisi!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_pengirim">Email *</label>
+                    <input type="email" id="email_pengirim" placeholder="nama@email.com">
+                    <span class="error-message" id="errorEmail">Masukkan email yang valid!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="jenis_layanan">Layanan yang dibutuhkan *</label>
+                    <select name="jenis_layanan" id="jenis_layanan">
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="web">Pembuatan Web</option>
+                        <option value="aplikasi">Pembuatan Aplikasi</option>
+                        <option value="lainnya">Lain-lain</option>
+                    </select>
+                    <span class="error-message" id="errorLayanan">Silakan pilih layanan yang dibutuhkan!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pesan">Pesan *</label>
+                    <textarea name="pesan" id="pesan" rows="5" placeholder="Tuliskan detail project Anda..."></textarea>
+                    <span class="error-message" id="errorPesan">Pesan tidak boleh kosong!</span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Kirim Pesan</button>
+                    <button type="reset" id="btnReset">Batal / Reset</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <center>&copy; Nenden Nurdianti</center>
+        <p>Teknik Informatika - Institut Teknologi Garut</p>
+        <br>
+    </footer>
+
+    <!-- Script JavaScript untuk Kontak Saya -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const alertSuccess = document.getElementById('alertSuccess');
+            const btnReset = document.getElementById('btnReset');
+
+            const inputNama = document.getElementById('nama_pengirim');
+            const inputEmail = document.getElementById('email_pengirim');
+            const selectLayanan = document.getElementById('jenis_layanan');
+            const inputPesan = document.getElementById('pesan');
+
+            const errorNama = document.getElementById('errorNama');
+            const errorEmail = document.getElementById('errorEmail');
+            const errorLayanan = document.getElementById('errorLayanan');
+            const errorPesan = document.getElementById('errorPesan');
+
+            // Helper Fungsi Validasi Email Format
+            function isValidEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+            // Reset pesan error visual
+            function clearErrors() {
+                [inputNama, inputEmail, selectLayanan, inputPesan].forEach(field => {
+                    field.style.borderColor = 'var(--pink-border)';
+                });
+                [errorNama, errorEmail, errorLayanan, errorPesan].forEach(err => {
+                    err.style.display = 'none';
+                });
+            }
+
+            // Event Submit Form Handling & Validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Mencegah reload / refresh halaman
+                clearErrors();
+
+                let isValid = true;
+
+                // 1. Validasi Nama
+                if (!inputNama.value.trim()) {
+                    errorNama.style.display = 'block';
+                    inputNama.style.borderColor = '#dc2626';
+                    isValid = false;
+                }
+
+                // 2. Validasi Email
+                const emailVal = inputEmail.value.trim();
+                if (!emailVal || !isValidEmail(emailVal)) {
+                    errorEmail.style.display = 'block';
+                    inputEmail.style.borderColor = '#dc2626';
+                    isValid = false;
+                }
+
+                // 3. Validasi Layanan
+                if (!selectLayanan.value) {
+                    errorLayanan.style.display = 'block';
+                    selectLayanan.style.borderColor = '#dc2626';
+                    isValid = false;
+                }
+
+                // 4. Validasi Pesan
+                if (!inputPesan.value.trim()) {
+                    errorPesan.style.display = 'block';
+                    inputPesan.style.borderColor = '#dc2626';
+                    isValid = false;
+                }
+
+                // Jika lolos validasi
+                if (isValid) {
+                    alertSuccess.style.display = 'block';
+                    form.reset();
+
+                    // Sembunyikan alert setelah 5 detik
+                    setTimeout(() => {
+                        alertSuccess.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Event Reset Form
+            btnReset.addEventListener('click', function() {
+                clearErrors();
+                alertSuccess.style.display = 'none';
+            });
+
+            // Live clear error saat pengguna mengetik/memilih
+            inputNama.addEventListener('input', () => {
+                if (inputNama.value.trim()) {
+                    errorNama.style.display = 'none';
+                    inputNama.style.borderColor = 'var(--pink-border)';
+                }
+            });
+
+            inputEmail.addEventListener('input', () => {
+                if (isValidEmail(inputEmail.value.trim())) {
+                    errorEmail.style.display = 'none';
+                    inputEmail.style.borderColor = 'var(--pink-border)';
+                }
+            });
+
+            selectLayanan.addEventListener('change', () => {
+                if (selectLayanan.value) {
+                    errorLayanan.style.display = 'none';
+                    selectLayanan.style.borderColor = 'var(--pink-border)';
+                }
+            });
+
+            inputPesan.addEventListener('input', () => {
+                if (inputPesan.value.trim()) {
+                    errorPesan.style.display = 'none';
+                    inputPesan.style.borderColor = 'var(--pink-border)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

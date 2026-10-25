@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Saya - Nenden Nurdianti</title>
+    <style>
+        /* --- CSS Reset & Custom Properties (Soft Pink & Rose Theme Konsisten) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-primary: #d97792;
+            --pink-dark: #9f4762;
+            --pink-light: #fce8ee;
+            --pink-subtle: #fff0f3;
+            --pink-border: #f3c9d4;
+            --rose-accent: #c48b9f;
+            
+            --bg-body: #fff8f9;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d2628;
+            --text-muted: #6b5c61;
+            
+            --shadow-card: 0 10px 30px -5px rgba(217, 119, 146, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 40px -10px rgba(217, 119, 146, 0.22);
+            
+            --radius-box: 24px;
+            --radius-card: 18px;
+            --radius-input: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation (Soft Pink Gradient Konsisten) --- */
+        header.main-header {
+            background: linear-gradient(135deg, #e895aa, #d97792, #b85472);
+            color: #ffffff;
+            padding: 4rem 1.5rem 3.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 146, 0.25);
+            position: relative;
+        }
+
+        header.main-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffffff, var(--pink-light), #ffffff);
+        }
+
+        header.main-header h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        header.main-header p {
+            color: var(--pink-subtle);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        header.main-header nav {
+            margin-top: 1.25rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #ffffff;
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 1000px;
+            width: 90%;
+            margin: 3.5rem auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+        }
+
+        /* --- Section Styling --- */
+        section {
+            background: var(--bg-card);
+            padding: 2.8rem;
+            border-radius: var(--radius-box);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--pink-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        section:hover {
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        section h2 {
+            font-size: 1.65rem;
+            color: var(--text-main);
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pink-light);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 75px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+            border-radius: 3px;
+        }
+
+        /* --- Article / Sub-card Styling --- */
+        article {
+            background: linear-gradient(135deg, var(--pink-subtle), #ffffff);
+            border: 1px solid var(--pink-border);
+            padding: 1.6rem;
+            border-radius: var(--radius-card);
+            margin-top: 1rem;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--pink-primary), var(--rose-accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        article:hover {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-card);
+            border-color: var(--pink-primary);
+            transform: translateY(-3px);
+        }
+
+        article:hover::before {
+            opacity: 1;
+        }
+
+        article h3 {
+            font-size: 1.25rem;
+            color: var(--pink-dark);
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .date-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--rose-accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        /* --- List Styling --- */
+        ul {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+        }
+
+        li {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+
+        .skills-list li {
+            background-color: var(--pink-subtle);
+            border: 1px solid var(--pink-border);
+            color: var(--pink-dark);
+            padding: 0.45rem 1.1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+        }
+
+        .skills-list li:hover {
+            background-color: var(--pink-primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Kartu Statistik Ringkasan --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--pink-subtle);
+            border: 1px solid var(--pink-border);
+            padding: 1.2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-card h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--pink-dark);
+        }
+
+        /* --- Live Search & Filter Bar --- */
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input-wrapper {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .filter-select-wrapper {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1.2rem;
+            border: 1px solid var(--pink-border);
+            border-radius: 9999px;
+            font-family: inherit;
+            font-size: 0.94rem;
+            outline: none;
+            background: #ffffff;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 146, 0.2);
+        }
+
+        /* --- Project Cards Grid --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 2rem;
+            border-radius: var(--radius-card);
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(217, 119, 146, 0.05);
+            border: 1px solid var(--pink-border);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--pink-primary);
+        }
+
+        .badge-kategori {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: var(--pink-dark);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            margin-top: 0.4rem;
+            margin-bottom: 0.8rem;
+            width: fit-content;
+        }
+
+        .status-badge.selesai {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.proses {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--pink-border);
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.55rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-toggle {
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--pink-primary);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-delete:hover {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            background-color: var(--pink-subtle);
+            border-radius: var(--radius-card);
+            border: 1px dashed var(--pink-border);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #3b2c31;
+            color: #d1b8c0;
+            text-align: center;
+            padding: 2.2rem 1rem;
+            font-size: 0.92rem;
+            margin-top: auto;
+            border-top: 1px solid #4f3c43;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header.main-header h1 {
+                font-size: 2.1rem;
+            }
+
+            section {
+                padding: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="main-header animate-fade-down">
+        <h1>Nenden Nurdianti</h1>
+        <p>Web Developer</p>
+
+        <div class="contact-info">
+            <span>Email: nendennrd1316@gmail.com</span> |
+            <span>Telepon: 082164522962</span> |
+            <span>Garut, Indonesia</span>
+        </div>
+
+        <div class="social-links">
+            <a href="https://id.linkedin.com/in/nenden-nurdianti-924991316" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/nendennrrr" target="_blank">GitHub</a>
+        </div>
+
+        <br>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html">Kontak Saya</a></li>
+                <li><a href="resume.html" class="active">Resume Saya</a></li>
+                <li><a href="project.html">Project Saya</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- PROFIL -->
+        <section class="animate-fade-up">
+            <h2>Profil</h2>
+            <p>
+                Saya adalah seorang Web Developer yang memiliki pengalaman
+                dalam membuat website modern, responsif, dan user-friendly.
+                Saya memiliki ketertarikan pada teknologi web, UI/UX,
+                dan pengembangan aplikasi.
+            </p>
+        </section>
+
+        <!-- STATISTIK PROYEK & AKSI INTERAKTIF (FITUR 2 & 3) -->
+        <section class="animate-fade-up" style="animation-delay: 0.05s;">
+            <h2>Eksplorasi Proyek Interaktif</h2>
+
+            <!-- Kartu Statistik -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Proyek</h4>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Selesai</h4>
+                    <div class="stat-value" id="statSelesai">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Dalam Pengerjaan</h4>
+                    <div class="stat-value" id="statProses">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Anggaran</h4>
+                    <div class="stat-value" id="statAnggaran" style="font-size: 1.1rem;">Rp 0</div>
+                </div>
+            </div>
+
+            <!-- FITUR 2: Real-time Search & Filter -->
+            <div class="search-filter-bar">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="🔍 Cari nama proyek secara real-time...">
+                </div>
+                <div class="filter-select-wrapper">
+                    <select id="filterKategori">
+                        <option value="ALL">Semua Kategori</option>
+                        <option value="Web App">Web App</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="Desktop App">Desktop App</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- FITUR 3: Dynamic Grid Cards -->
+            <div class="projects-grid" id="projectsContainer"></div>
+        </section>
+
+        <!-- PENGALAMAN KERJA -->
+        <section class="animate-fade-up" style="animation-delay: 0.1s;">
+            <h2>Pengalaman Kerja</h2>
+
+            <article>
+                <h3>Frontend Developer</h3>
+                <p class="company-name">Institut Teknologi Garut</p>
+                <p class="date-badge">2024 - Sekarang</p>
+
+                <ul>
+                    <li>Mengembangkan website menggunakan HTML, CSS, dan JavaScript.</li>
+                    <li>Membuat tampilan website yang responsif dan fleksibel di berbagai perangkat.</li>
+                    <li>Berkolaborasi dengan designer dan backend developer untuk merancang fitur baru.</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Junior Web Developer</h3>
+                <p class="company-name">Perusahaan Sebelumnya</p>
+                <p class="date-badge">2022 - 2024</p>
+
+                <ul>
+                    <li>Membuat dan melakukan pemeliharaan (maintenance) sistem website secara berkala.</li>
+                    <li>Melakukan debugging serta perbaikan bug pada fitur-fitur utama.</li>
+                    <li>Mengoptimalkan performa dan kecepatan muat halaman website.</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- PENDIDIKAN -->
+        <section class="animate-fade-up" style="animation-delay: 0.15s;">
+            <h2>Pendidikan</h2>
+
+            <article>
+                <h3>S1 Teknik Informatika</h3>
+                <p class="company-name">Institut Teknologi Garut</p>
+                <p class="date-badge">2024 - Sekarang</p>
+
+                <p>
+                    Fokus pada pemrograman, pengembangan perangkat lunak,
+                    basis data (database), serta teknologi web modern.
+                </p>
+            </article>
+        </section>
+
+        <!-- KEAHLIAN -->
+        <section class="animate-fade-up" style="animation-delay: 0.2s;">
+            <h2>Keahlian</h2>
+            <ul class="skills-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Git & GitHub</li>
+                <li>UI/UX Design</li>
+            </ul>
+        </section>
+
+        <!-- PROYEK UNGGULAN -->
+        <section class="animate-fade-up" style="animation-delay: 0.25s;">
+            <h2>Proyek Unggulan</h2>
+
+            <article>
+                <h3>Portfolio Website</h3>
+                <p>
+                    Website portfolio pribadi untuk menampilkan
+                    informasi, pengalaman, dan proyek yang dikerjakan.
+                </p>
+            </article>
+
+            <article>
+                <h3>Dashboard Admin</h3>
+                <p>
+                    Dashboard untuk mengelola data pengguna,
+                    laporan, dan informasi bisnis secara terstruktur.
+                </p>
+            </article>
+        </section>
+
+        <!-- SERTIFIKASI -->
+        <section class="animate-fade-up" style="animation-delay: 0.3s;">
+            <h2>Sertifikasi</h2>
+
+            <ul>
+                <li>
+                    <strong>Web Development Certificate</strong> - Mobidu, 2024
+                </li>
+                <li>
+                    <strong>Aplikasi Perpustakaan</strong> - Klipaaa, 2023
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Nenden Nurdianti</p>
+        <p>Teknik Informatika - Institut Teknologi Garut</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Array State Data Proyek
+        let projects = [
+            {
+                id: 1,
+                judul: "Portfolio Website",
+                kategori: "Web App",
+                anggaran: 2500000,
+                selesai: true
+            },
+            {
+                id: 2,
+                judul: "Dashboard Admin",
+                kategori: "Web App",
+                anggaran: 4500000,
+                selesai: false
+            },
+            {
+                id: 3,
+                judul: "Aplikasi Perpustakaan",
+                kategori: "Desktop App",
+                anggaran: 3000000,
+                selesai: true
+            },
+            {
+                id: 4,
+                judul: "Desain UI Mobile Store",
+                kategori: "UI/UX Design",
+                anggaran: 1800000,
+                selesai: false
+            }
+        ];
+
+        // Format Angka Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
+        }
+
+        // Render Utama
+        function render() {
+            renderProjects();
+            renderStats();
+        }
+
+        // Render Statistik
+        function renderStats() {
+            const total = projects.length;
+            const selesai = projects.filter(p => p.selesai).length;
+            const proses = total - selesai;
+            const totalAnggaran = projects.reduce((sum, p) => sum + p.anggaran, 0);
+
+            document.getElementById('statTotal').innerText = total;
+            document.getElementById('statSelesai').innerText = selesai;
+            document.getElementById('statProses').innerText = proses;
+            document.getElementById('statAnggaran').innerText = formatRupiah(totalAnggaran);
+        }
+
+        // FITUR 2: Live Search & Filter
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            const searchKeyword = document.getElementById('searchInput').value.toLowerCase().trim();
+            const selectedKategori = document.getElementById('filterKategori').value;
+
+            // Filter kombinasi .filter() dan .toLowerCase().includes()
+            const filteredProjects = projects.filter(project => {
+                const matchesSearch = project.judul.toLowerCase().includes(searchKeyword);
+                const matchesKategori = selectedKategori === 'ALL' || project.kategori === selectedKategori;
+                return matchesSearch && matchesKategori;
+            });
+
+            if (filteredProjects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>Tidak ada proyek yang sesuai dengan pencarian Anda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredProjects.map(project => `
+                <div class="project-card">
+                    <div>
+                        <span class="badge-kategori">${project.kategori}</span>
+                        <h3>${project.judul}</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.2rem;">
+                            Estimasi: <strong style="color: var(--pink-dark);">${formatRupiah(project.anggaran)}</strong>
+                        </p>
+                        <span class="status-badge ${project.selesai ? 'selesai' : 'proses'}">
+                            ${project.selesai ? '✓ Selesai' : '⏳ Dalam Pengerjaan'}
+                        </span>
+                    </div>
+
+                    <!-- FITUR 3: Tombol Aksi Interaktif -->
+                    <div class="card-actions">
+                        <button class="btn-action btn-toggle" onclick="toggleStatus(${project.id})">
+                            ${project.selesai ? 'Ubah Status' : 'Tandai Selesai'}
+                        </button>
+                        <button class="btn-action btn-delete" onclick="hapusProyek(${project.id})">
+                            Hapus
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event Listener Live Search & Filter
+        document.getElementById('searchInput').addEventListener('input', renderProjects);
+        document.getElementById('filterKategori').addEventListener('change', renderProjects);
+
+        // FITUR 3A: Toggle Status
+        function toggleStatus(id) {
+            projects = projects.map(p => p.id === id ? { ...p, selesai: !p.selesai } : p);
+            render();
+        }
+
+        // FITUR 3B: Hapus Data
+        function hapusProyek(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus proyek ini?")) {
+                projects = projects.filter(p => p.id !== id);
+                render();
+            }
+        }
+
+        // Inisialisasi Tampilan
+        render();
+    </script>
+</body>
+
+</html>

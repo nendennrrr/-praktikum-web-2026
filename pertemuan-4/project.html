@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Project - Nenden Nurdianti</title>
+    <style>
+        /* --- CSS Reset & Custom Properties (Soft Pink & Rose Theme) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-primary: #d97792;
+            --pink-dark: #9f4762;
+            --pink-light: #fce8ee;
+            --pink-subtle: #fff0f3;
+            --pink-border: #f3c9d4;
+            --rose-accent: #c48b9f;
+            
+            --bg-body: #fff8f9;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d2628;
+            --text-muted: #6b5c61;
+            
+            --shadow-card: 0 10px 30px -5px rgba(217, 119, 146, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 40px -10px rgba(217, 119, 146, 0.22);
+            
+            --radius-box: 24px;
+            --radius-card: 18px;
+            --radius-input: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .animate-fade-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation --- */
+        header.main-header {
+            background: linear-gradient(135deg, #e895aa, #d97792, #b85472);
+            color: #ffffff;
+            padding: 3.5rem 1.5rem 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 146, 0.25);
+            position: relative;
+        }
+
+        header.main-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffffff, var(--pink-light), #ffffff);
+        }
+
+        header.main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #ffffff;
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Main Layout --- */
+        main {
+            max-width: 1000px;
+            width: 90%;
+            margin: 3rem auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* --- Section Styling --- */
+        section {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-box);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--pink-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        section:hover {
+            border-color: var(--pink-primary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-bottom: 1.6rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pink-light);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 75px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+            border-radius: 3px;
+        }
+
+        /* --- Kartu Statistik --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff, var(--pink-subtle));
+            border: 1px solid var(--pink-border);
+            border-radius: var(--radius-card);
+            padding: 1.4rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(217, 119, 146, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--pink-dark);
+        }
+
+        /* --- FITUR 1: Form Styling & Validation --- */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.92rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.85rem 1.1rem;
+            border: 1px solid var(--pink-border);
+            border-radius: var(--radius-input);
+            font-size: 0.96rem;
+            font-family: inherit;
+            color: var(--text-main);
+            background-color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 4px rgba(217, 119, 146, 0.15);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            user-select: none;
+            margin-top: 0.4rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--pink-primary);
+            cursor: pointer;
+        }
+
+        .form-error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: none;
+            margin-top: -0.3rem;
+        }
+
+        .btn-submit {
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: var(--radius-input);
+            font-size: 0.98rem;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-dark));
+            color: white;
+            box-shadow: 0 6px 20px rgba(217, 119, 146, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(217, 119, 146, 0.45);
+        }
+
+        /* --- FITUR 2: Live Search & Filter Bar --- */
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input-wrapper {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .filter-select-wrapper {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        /* --- FITUR 3: Cards Grid & Action Buttons --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 1.8rem;
+            border-radius: var(--radius-card);
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(217, 119, 146, 0.05);
+            border: 1px solid var(--pink-border);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--rose-accent));
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--pink-primary);
+        }
+
+        .card-header {
+            margin-bottom: 1rem;
+        }
+
+        .badge-kategori {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: var(--pink-dark);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-details {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .card-details li {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+        }
+
+        .status-badge.selesai {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.proses {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.6rem;
+            border-top: 1px solid var(--pink-light);
+            padding-top: 1rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.6rem 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+
+        .btn-toggle {
+            background-color: var(--pink-subtle);
+            color: var(--pink-dark);
+            border: 1px solid var(--pink-border);
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--pink-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .btn-delete:hover {
+            background-color: #fca5a5;
+            color: #7f1d1d;
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+            background: var(--pink-subtle);
+            border-radius: var(--radius-card);
+            border: 1px dashed var(--pink-border);
+        }
+
+        /* --- Aside / Status Freelance --- */
+        aside {
+            background: linear-gradient(135deg, #ffffff, var(--pink-subtle));
+            border: 1px solid var(--pink-border);
+            padding: 1.8rem;
+            border-radius: var(--radius-box);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.1rem;
+        }
+
+        aside::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--pink-primary), var(--rose-accent));
+        }
+
+        aside h3 {
+            color: var(--text-main);
+            font-size: 1.08rem;
+            margin-bottom: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        aside h3::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: pulseGlow 2s infinite;
+        }
+
+        aside p {
+            color: var(--pink-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #3b2c31;
+            color: #d1b8c0;
+            text-align: center;
+            padding: 2.2rem 1rem;
+            font-size: 0.92rem;
+            margin-top: auto;
+            border-top: 1px solid #4f3c43;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header.main-header h1 {
+                font-size: 2.1rem;
+            }
+
+            section {
+                padding: 1.8rem;
+            }
+
+            aside {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header animate-fade-down">
+        <h1>Portofolio Mahasiswa</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="kontak.html">Kontak Saya</a></li>
+                <li><a href="resume.html">Resume Saya</a></li>
+                <li><a href="project.html" class="active">Project Saya</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Ringkasan Kartu Statistik -->
+        <section class="animate-fade-up">
+            <h2>Statistik Proyek</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Proyek</h4>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Proyek Selesai</h4>
+                    <div class="stat-value" id="statSelesai">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Dalam Pengerjaan</h4>
+                    <div class="stat-value" id="statProses">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Anggaran</h4>
+                    <div class="stat-value" id="statAnggaran" style="font-size: 1.2rem;">Rp 0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FITUR 1: Formulir Input Proyek Dinamis -->
+        <section class="animate-fade-up" style="animation-delay: 0.1s;">
+            <h2>Tambah Proyek Baru</h2>
+            <form id="projectForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="judulProyek">Judul Proyek *</label>
+                        <input type="text" id="judulProyek" placeholder="Contoh: Aplikasi E-Commerce" required>
+                        <div class="form-error" id="errorJudul">Judul proyek tidak boleh kosong!</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategoriProyek">Kategori Proyek *</label>
+                        <select id="kategoriProyek" required>
+                            <option value="Web App">Web App</option>
+                            <option value="Mobile App">Mobile App</option>
+                            <option value="Desktop App">Desktop App</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anggaranProyek">Estimasi Anggaran (Rp) *</label>
+                        <input type="number" id="anggaranProyek" min="1" placeholder="Contoh: 2500000" required>
+                        <div class="form-error" id="errorAnggaran">Anggaran harus lebih besar dari 0!</div>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="statusSelesai">
+                        <span>Status: Sudah Selesai Ditangani</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">+ Tambahkan Proyek</button>
+            </form>
+        </section>
+
+        <!-- FITUR 2 & 3: Filter, Live Search & Grid Kartu Proyek -->
+        <section class="animate-fade-up" style="animation-delay: 0.2s;">
+            <h2>Daftar Project Saya</h2>
+
+            <!-- Search & Filter Bar -->
+            <div class="search-filter-bar">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="🔍 Cari nama atau judul proyek secara real-time...">
+                </div>
+                <div class="filter-select-wrapper">
+                    <select id="filterKategori">
+                        <option value="ALL">Semua Kategori</option>
+                        <option value="Web App">Web App</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="Desktop App">Desktop App</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Container Kartu Proyek -->
+            <div class="projects-grid" id="projectsContainer">
+                <!-- Card items akan di-render secara dinamis melalui JavaScript -->
+            </div>
+        </section>
+
+        <!-- Aside Banner -->
+        <aside class="animate-fade-up" style="animation-delay: 0.3s;">
+            <h3>Status Pekerjaan:</h3>
+            <p>Bisa menerima project freelance</p>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Nenden Nurdianti</p>
+        <p>Teknik Informatika - Institut Teknologi Garut</p>
+    </footer>
+
+    <!-- Script JavaScript Utama (Fitur 1, 2, & 3) -->
+    <script>
+        // Array Data Awal Proyek (State)
+        let projects = [
+            {
+                id: 1,
+                judul: "Aplikasi Kasir Sederhana",
+                kategori: "Web App",
+                anggaran: 3500000,
+                selesai: true
+            },
+            {
+                id: 2,
+                judul: "Sistem Inventaris Keuangan",
+                kategori: "Desktop App",
+                anggaran: 5000000,
+                selesai: false
+            },
+            {
+                id: 3,
+                judul: "Kalkulator Sederhana",
+                kategori: "Web App",
+                anggaran: 1200000,
+                selesai: true
+            }
+        ];
+
+        // Format Angka ke Rupiah IDR
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
+        }
+
+        // Helper Render Ulang Halaman
+        function render() {
+            renderProjects();
+            renderStats();
+        }
+
+        // Render Statistik Proyek
+        function renderStats() {
+            const total = projects.length;
+            const selesai = projects.filter(p => p.selesai).length;
+            const proses = total - selesai;
+            const totalAnggaran = projects.reduce((sum, p) => sum + p.anggaran, 0);
+
+            document.getElementById('statTotal').innerText = total;
+            document.getElementById('statSelesai').innerText = selesai;
+            document.getElementById('statProses').innerText = proses;
+            document.getElementById('statAnggaran').innerText = formatRupiah(totalAnggaran);
+        }
+
+        // FITUR 2: Render Kartu Proyek dengan Live Search & Filter
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            const searchKeyword = document.getElementById('searchInput').value.toLowerCase().trim();
+            const selectedKategori = document.getElementById('filterKategori').value;
+
+            // Filter Real-Time berdasarkan pencarian teks & kategori
+            const filteredProjects = projects.filter(project => {
+                const matchesSearch = project.judul.toLowerCase().includes(searchKeyword);
+                const matchesKategori = selectedKategori === 'ALL' || project.kategori === selectedKategori;
+                return matchesSearch && matchesKategori;
+            });
+
+            if (filteredProjects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>Tidak ada proyek yang cocok dengan pencarian atau kriteria filter Anda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredProjects.map(project => `
+                <div class="project-card">
+                    <div class="card-header">
+                        <span class="badge-kategori">${project.kategori}</span>
+                        <h3>${project.judul}</h3>
+                    </div>
+                    
+                    <ul class="card-details">
+                        <li>
+                            <span>Estimasi Anggaran:</span>
+                            <strong style="color: var(--pink-dark);">${formatRupiah(project.anggaran)}</strong>
+                        </li>
+                        <li>
+                            <span>Status:</span>
+                            <span class="status-badge ${project.selesai ? 'selesai' : 'proses'}">
+                                ${project.selesai ? '✓ Selesai' : '⏳ Dalam Pengerjaan'}
+                            </span>
+                        </li>
+                    </ul>
+
+                    <!-- FITUR 3: Tombol Aksi Interaktif -->
+                    <div class="card-actions">
+                        <button class="btn-action btn-toggle" onclick="toggleStatus(${project.id})">
+                            ${project.selesai ? 'Ubah ke Pengerjaan' : 'Tandai Selesai'}
+                        </button>
+                        <button class="btn-action btn-delete" onclick="hapusProyek(${project.id})">
+                            Hapus
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // FITUR 1: Form Handling & Validation
+        document.getElementById('projectForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Cegah reload halaman
+
+            const inputJudul = document.getElementById('judulProyek');
+            const inputKategori = document.getElementById('kategoriProyek');
+            const inputAnggaran = document.getElementById('anggaranProyek');
+            const inputSelesai = document.getElementById('statusSelesai');
+
+            const errorJudul = document.getElementById('errorJudul');
+            const errorAnggaran = document.getElementById('errorAnggaran');
+
+            const judulVal = inputJudul.value.trim();
+            const anggaranVal = parseFloat(inputAnggaran.value);
+            let isValid = true;
+
+            // Validasi Judul
+            if (!judulVal) {
+                errorJudul.style.display = 'block';
+                inputJudul.style.borderColor = '#dc2626';
+                isValid = false;
+            } else {
+                errorJudul.style.display = 'none';
+                inputJudul.style.borderColor = 'var(--pink-border)';
+            }
+
+            // Validasi Anggaran (> 0)
+            if (isNaN(anggaranVal) || anggaranVal <= 0) {
+                errorAnggaran.style.display = 'block';
+                inputAnggaran.style.borderColor = '#dc2626';
+                isValid = false;
+            } else {
+                errorAnggaran.style.display = 'none';
+                inputAnggaran.style.borderColor = 'var(--pink-border)';
+            }
+
+            if (!isValid) return;
+
+            // Objek Proyek Baru dengan Date.now() sebagai ID unik
+            const newProject = {
+                id: Date.now(),
+                judul: judulVal,
+                kategori: inputKategori.value,
+                anggaran: anggaranVal,
+                selesai: inputSelesai.checked
+            };
+
+            // Masukkan ke array menggunakan spread operator
+            projects = [newProject, ...projects];
+
+            // Reset Form Input
+            this.reset();
+
+            // Render Ulang Tampilan & Statistik
+            render();
+        });
+
+        // Event Listener untuk Live Search (event 'input') & Filter Select
+        document.getElementById('searchInput').addEventListener('input', renderProjects);
+        document.getElementById('filterKategori').addEventListener('change', renderProjects);
+
+        // FITUR 3A: Toggle Status Proyek
+        function toggleStatus(id) {
+            projects = projects.map(p => {
+                if (p.id === id) {
+                    return { ...p, selesai: !p.selesai };
+                }
+                return p;
+            });
+            render();
+        }
+
+        // FITUR 3B: Hapus Proyek Berdasarkan ID
+        function hapusProyek(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus proyek ini dari daftar?")) {
+                projects = projects.filter(p => p.id !== id);
+                render();
+            }
+        }
+
+        // Inisialisasi Tampilan Awal
+        render();
+    </script>
+</body>
+</html>
